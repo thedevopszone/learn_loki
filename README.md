@@ -128,6 +128,40 @@ iptables-save > /etc/iptables/rules.v6
 ```
 
 
+## LogCLI
+
+LogCLI is the command-line interface to Grafana Loki. It facilitates running LogQL queries against a Loki instance.
+
+Install
+```
+wget https://github.com/grafana/loki/releases/download/v2.9.8/logcli-linux-amd64.zip
+unzip logcli-linux-amd64.zip
+
+cp logcli-linux-amd64 /usr/local/bin/logcli
+```
+
+Set up command completion
+```
+eval "$(logcli --completion-script-bash)"
+```
+
+Set the env variable
+```
+export LOKI_ADDR=http://localhost:3100
+```
+
+```
+logcli labels job
+>https://logs-dev-ops-tools1.grafana.net/api/prom/label/job/values
+>loki-ops/consul
+>loki-ops/loki-gw
+
+logcli query '{job="loki-ops/consul"}'
+
+
+```
+
+
 ## Troubleshooting
 
 ### Permission Denied, Internal Server Error

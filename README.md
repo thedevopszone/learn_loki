@@ -127,6 +127,37 @@ iptables-save > /etc/iptables/rules.v4
 iptables-save > /etc/iptables/rules.v6
 ```
 
+## Loki API
+
+```
+$ curl -S -H "Content-Type: application/json" -XPOST -s http://localhost:3100/loki/api/v1/push --data-raw '{"streams": [{ "stream": { "app": "app1" }, "values": [ [ "1653855518000000000", "random log line" ] ] }]}'
+
+$ curl http://localhost:3100/loki/api/v1/labels
+{"status":"success","data":["__name__","app"]}
+
+As you can see in the second curl there is now a new label named "app". We can explore possible values for this label with the following curl.
+
+$ curl http://localhost:3100/loki/api/v1/label/app/values
+{"status":"success","data":["app1"]}
+
+And finaly see the stream with this label:
+
+$ curl -G -Ss  http://localhost:3100/loki/api/v1/query_range --data-urlencode 'query={app="app1"}' | jq .
+{
+  "status": "success",
+(...)
+        "values": [
+          [
+            "1653855518000000000",
+            "random log line"
+          ]
+        ]
+      }
+(...)
+
+```
+
+
 
 ## LogCLI
 

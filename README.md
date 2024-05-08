@@ -148,9 +148,14 @@ eval "$(logcli --completion-script-bash)"
 Set the env variable
 ```
 export LOKI_ADDR=http://localhost:3100
+
+export LOKI_USERNAME=admin
+export LOKI_PASSWORD=admin
 ```
 
 ```
+logcli labels
+
 logcli labels job
 >https://logs-dev-ops-tools1.grafana.net/api/prom/label/job/values
 >loki-ops/consul

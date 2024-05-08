@@ -9,7 +9,7 @@ dnf install unzip
 unzip loki-linux-amd64.zip
 
 chmod a+x loki-linux-amd64
-cp loki-linux-amd64 /usr/local/bin/
+cp loki-linux-amd64 /usr/local/bin/loki
 
 export PATH=$PATH:/usr/local/bin/
 

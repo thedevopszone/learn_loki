@@ -200,9 +200,13 @@ iptables-save > /etc/iptables/rules.v6
 ## Loki API
 
 ```
-
+date +%s
+1715165157
+1714965518000000000
 
 $ curl -S -H "Content-Type: application/json" -XPOST -s http://localhost:3100/loki/api/v1/push --data-raw '{"streams": [{ "stream": { "app": "app1" }, "values": [ [ "1714965518000000000", "random log line" ] ] }]}'
+
+curl -S -H "Content-Type: application/json" -XPOST -s http://localhost:3100/loki/api/v1/push --data-raw '{"streams": [{ "stream": { "planet": "world" }, "values": [ [ "1715165157000000000", "Hello World from LOKI" ] ] }]}'
 
 
 $ curl http://localhost:3100/loki/api/v1/labels
@@ -269,6 +273,10 @@ logcli labels '{job!=""}'
 
 List logs from one job
 logcli query '{job="your_job_name"}'
+
+Add one log line
+logcli push 'your_log_message_here' -label 'job="your_job_name"'
+logcli push 'Hello World, this is a message from LOKI' -label 'job="job99"'
 
 logcli labels job
 >https://logs-dev-ops-tools1.grafana.net/api/prom/label/job/values

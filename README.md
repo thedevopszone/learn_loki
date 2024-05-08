@@ -94,7 +94,7 @@ After=network.target
 [Service]
 Type=simple
 User=loki
-ExecStart=/usr/local/bin/loki-linux-amd64 -config.file /etc/loki/config-loki.yml
+ExecStart=/usr/local/bin/loki -config.file /etc/loki/config-loki.yml
 
 [Install]
 WantedBy=multi-user.target

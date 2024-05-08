@@ -14,7 +14,9 @@ cp loki-linux-amd64 /usr/local/bin/loki
 export PATH=$PATH:/usr/local/bin/
 
 mkdir /etc/loki
-cd /etc/loki
+chown loki:loki /etc/loki/config-loki.yml
+
+
 
 
 ```

@@ -3,7 +3,6 @@
 ## Install
 
 ```
-
 curl -O -L "https://github.com/grafana/loki/releases/download/v2.9.8/loki-linux-amd64.zip"
 dnf install unzip
 unzip loki-linux-amd64.zip
@@ -16,12 +15,45 @@ export PATH=$PATH:/usr/local/bin/
 mkdir /etc/loki
 chown loki:loki /etc/loki/config-loki.yml
 
-
-
-
 ```
 
+
 vi /etc/loki/config-loki.yml
+```
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+  grpc_listen_port: 9096
+
+common:
+  path_prefix: /tmp/loki
+  storage:
+    filesystem:
+      chunks_directory: /tmp/loki/chunks
+      rules_directory: /tmp/loki/rules
+  replication_factor: 1
+  ring:
+    kvstore:
+      store: inmemory
+
+schema_config:
+  configs:
+    - from: 2020-10-24
+      store: boltdb-shipper
+      object_store: filesystem
+      schema: v11
+      index:
+        prefix: index_
+        period: 24h
+
+ruler:
+  alertmanager_url: http://localhost:9093
+```
+
+
+
+LATEST => vi /etc/loki/config-loki.yml
 ```
 auth_enabled: false
 

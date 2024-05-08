@@ -200,7 +200,10 @@ iptables-save > /etc/iptables/rules.v6
 ## Loki API
 
 ```
-$ curl -S -H "Content-Type: application/json" -XPOST -s http://localhost:3100/loki/api/v1/push --data-raw '{"streams": [{ "stream": { "app": "app1" }, "values": [ [ "1653855518000000000", "random log line" ] ] }]}'
+
+
+$ curl -S -H "Content-Type: application/json" -XPOST -s http://localhost:3100/loki/api/v1/push --data-raw '{"streams": [{ "stream": { "app": "app1" }, "values": [ [ "1714965518000000000", "random log line" ] ] }]}'
+
 
 $ curl http://localhost:3100/loki/api/v1/labels
 {"status":"success","data":["__name__","app"]}

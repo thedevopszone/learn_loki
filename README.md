@@ -146,6 +146,15 @@ systemctl status loki
 
 ## Configure Firewall
 
+
+```
+sudo firewall-cmd --zone=public --add-port=3100/tcp --permanent
+sudo firewall-cmd --zone=public --add-port=9096/tcp --permanent
+sudo firewall-cmd --reload
+```
+
+
+
 If you only want localhost to be able to connect, then type
 ```
 iptables -A INPUT -p tcp -s localhost --dport 3100 -j ACCEPT

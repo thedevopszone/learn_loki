@@ -7,7 +7,6 @@
 curl -O -L "https://github.com/grafana/loki/releases/download/v2.9.8/loki-linux-amd64.zip"
 dnf install unzip
 unzip loki-linux-amd64.zip
-cd loki-linux-amd64
 
 chmod a+x loki-linux-amd64
 cp loki-linux-amd64 /usr/local/bin/

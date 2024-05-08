@@ -151,6 +151,8 @@ systemctl status loki
 sudo firewall-cmd --zone=public --add-port=3100/tcp --permanent
 sudo firewall-cmd --zone=public --add-port=9096/tcp --permanent
 sudo firewall-cmd --reload
+
+curl localhost:3100/metrics
 ```
 
 

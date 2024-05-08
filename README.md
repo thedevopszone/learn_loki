@@ -28,6 +28,7 @@ server:
   grpc_listen_port: 9096
 
 common:
+  instance_addr: 127.0.0.1
   path_prefix: /tmp/loki
   storage:
     filesystem:
@@ -38,18 +39,41 @@ common:
     kvstore:
       store: inmemory
 
+query_range:
+  results_cache:
+    cache:
+      embedded_cache:
+        enabled: true
+        max_size_mb: 100
+
 schema_config:
   configs:
     - from: 2020-10-24
-      store: boltdb-shipper
+      store: tsdb
       object_store: filesystem
-      schema: v11
+      schema: v13
       index:
         prefix: index_
         period: 24h
 
 ruler:
   alertmanager_url: http://localhost:9093
+
+frontend:
+  encoding: protobuf
+
+# By default, Loki will send anonymous, but uniquely-identifiable usage and configuration
+# analytics to Grafana Labs. These statistics are sent to https://stats.grafana.org/
+#
+# Statistics help us better understand how Loki is used, and they show us performance
+# levels for most users. This helps us prioritize features and documentation.
+# For more information on what's sent, look at
+# https://github.com/grafana/loki/blob/main/pkg/analytics/stats.go
+# Refer to the buildReport method to see what goes into a report.
+#
+# If you would like to disable reporting, uncomment the following lines:
+#analytics:
+#  reporting_enabled: false
 ```
 This default configuration was copied from: https://raw.githubusercontent.com/grafana/loki/master/cmd/loki/loki-local-config.yaml  
 There may be changes to this config depending on any future updates to Loki.

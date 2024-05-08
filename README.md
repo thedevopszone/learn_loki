@@ -260,6 +260,16 @@ export LOKI_PASSWORD=admin
 ```
 logcli labels
 
+
+All log lines
+logcli query '{job!=""}'
+
+List all jobs
+logcli labels '{job!=""}'
+
+List logs from one job
+logcli query '{job="your_job_name"}'
+
 logcli labels job
 >https://logs-dev-ops-tools1.grafana.net/api/prom/label/job/values
 >loki-ops/consul
